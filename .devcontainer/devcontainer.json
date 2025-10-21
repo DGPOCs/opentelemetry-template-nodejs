@@ -1,0 +1,30 @@
+{
+  "name": "OpenTelemetry Node.js Service",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      "VARIANT": "20-bullseye"
+    }
+  },
+  "runArgs": [
+    "--env-file",
+    "../.env"
+  ],
+  "postCreateCommand": "npm install",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+  "forwardPorts": [3000],
+  "remoteEnv": {
+    "NODE_ENV": "development"
+  }
+}
