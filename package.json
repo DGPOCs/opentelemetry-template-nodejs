@@ -1,0 +1,30 @@
+{
+  "name": "opentelemetry-coinlore-api",
+  "version": "1.0.0",
+  "description": "API backend that fetches Coinlore cryptocurrency data with OpenTelemetry tracing",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node -r ./src/tracing.js src/server.js",
+    "dev": "nodemon --require ./src/tracing.js src/server.js"
+  },
+  "keywords": [
+    "opentelemetry",
+    "coinlore",
+    "cryptocurrency",
+    "express"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/instrumentation-express": "^0.56.0",
+    "@opentelemetry/instrumentation-http": "^0.207.0",
+    "@opentelemetry/resources": "^2.2.0",
+    "@opentelemetry/sdk-node": "^0.207.0",
+    "@opentelemetry/sdk-trace-base": "^2.2.0",
+    "@opentelemetry/semantic-conventions": "^1.37.0",
+    "axios": "^1.12.2",
+    "express": "^5.1.0"
+  }
+}
