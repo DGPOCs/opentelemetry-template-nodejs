@@ -2,6 +2,7 @@
 
 const express = require('express');
 const cryptoRouter = require('./routes/crypto');
+const telemetry = require('./telemetry/mongoTelemetry');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +16,10 @@ app.get('/health', (_req, res) => {
 
 app.use((err, _req, res, _next) => {
   console.error('Unhandled error:', err);
+  telemetry.recordLog('error', 'Unhandled server error', {
+    message: err.message,
+    stack: err.stack,
+  });
   res.status(err.status || 500).json({
     error: 'Internal Server Error',
     message: err.message || 'Unexpected error',
@@ -23,4 +28,5 @@ app.use((err, _req, res, _next) => {
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  telemetry.recordLog('info', 'Server started', { port: PORT });
 });

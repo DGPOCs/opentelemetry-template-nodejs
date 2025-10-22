@@ -1,0 +1,16 @@
+services:
+  app:
+    build: .
+    container_name: opentelemetry-node-service
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: ${PORT:-3000}
+      MONGODB_URI: ${MONGODB_URI}
+      MONGODB_DB_NAME: ${MONGODB_DB_NAME:-telemetry}
+      MONGODB_TRACES_COLLECTION: ${MONGODB_TRACES_COLLECTION:-otel_traces}
+      MONGODB_LOGS_COLLECTION: ${MONGODB_LOGS_COLLECTION:-otel_logs}
+      MONGODB_METRICS_COLLECTION: ${MONGODB_METRICS_COLLECTION:-otel_metrics}
+    restart: unless-stopped
+    depends_on: []

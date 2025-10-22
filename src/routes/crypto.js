@@ -3,6 +3,7 @@
 const express = require('express');
 const { getCryptocurrencies } = require('../services/coinloreClient');
 const { trace, SpanStatusCode } = require('@opentelemetry/api');
+const telemetry = require('../telemetry/mongoTelemetry');
 
 const router = express.Router();
 const tracer = trace.getTracer('coinlore-api-tracer');
@@ -22,11 +23,23 @@ router.get('/cryptocurrencies', async (req, res, next) => {
       }
     }
 
+    telemetry.recordLog('info', 'Requesting cryptocurrencies', {
+      route: '/api/cryptocurrencies',
+      limit: limit ?? null,
+    });
+
     const cryptocurrencies = await getCryptocurrencies(limit, span);
+    telemetry.recordMetric('cryptocurrencies.count', cryptocurrencies.length, {
+      limit: limit ?? 'all',
+    });
     res.json({ data: cryptocurrencies });
   } catch (error) {
     span.recordException(error);
     span.setStatus({ code: SpanStatusCode.ERROR, message: error.message });
+    telemetry.recordLog('error', 'Failed to fetch cryptocurrencies', {
+      message: error.message,
+      status: error.status,
+    });
     next(error);
   } finally {
     span.end();
