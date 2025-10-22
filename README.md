@@ -10,7 +10,7 @@ Este proyecto expone un backend en Node.js que consulta la API pública de Coinl
 
 ## Variables de entorno
 
-La conexión con MongoDB y la configuración del servicio se realiza mediante variables de entorno:
+La conexión con MongoDB y la configuración del servicio se realiza mediante variables de entorno. Puedes definirlas creando un archivo `.env` en la raíz del proyecto (por ejemplo, copiando `cp .env.example .env`). Tanto Docker Compose como el devcontainer y la aplicación en Node.js leerán automáticamente este archivo si existe.
 
 | Variable | Descripción | Valor por defecto |
 | --- | --- | --- |
@@ -23,11 +23,11 @@ La conexión con MongoDB y la configuración del servicio se realiza mediante va
 | `OTEL_SERVICE_NAME` | Nombre del servicio para OpenTelemetry | `coinlore-api-service` |
 | `OTEL_SERVICE_NAMESPACE` | Namespace del servicio | `crypto-data` |
 
-> Puedes definir estas variables en un archivo `.env` en la raíz del proyecto para que sean consumidas tanto por Docker como por el devcontainer.
+> El archivo `.env.example` incluye una plantilla con los valores esperados. Personaliza las credenciales de MongoDB antes de ejecutar la aplicación.
 
 ## Uso en desarrollo local
 
-Instala las dependencias y ejecuta el servidor:
+Instala las dependencias y ejecuta el servidor (asegúrate de tener configurado tu archivo `.env` si necesitas conectar con MongoDB):
 
 ```bash
 npm install
@@ -47,7 +47,7 @@ El directorio `.devcontainer/` contiene la configuración necesaria para abrir e
 
 ## Ejecución con Docker
 
-Construye la imagen y levanta el servicio con Docker Compose:
+Construye la imagen y levanta el servicio con Docker Compose (Docker leerá automáticamente las variables definidas en `.env`):
 
 ```bash
 docker compose up --build

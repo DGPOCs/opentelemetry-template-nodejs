@@ -1,5 +1,7 @@
 'use strict';
 
+require('../config/environment');
+
 const { MongoClient } = require('mongodb');
 
 let client;

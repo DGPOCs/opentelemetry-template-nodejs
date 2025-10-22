@@ -1,5 +1,7 @@
 'use strict';
 
+require('./config/environment');
+
 const express = require('express');
 const cryptoRouter = require('./routes/crypto');
 const telemetry = require('./telemetry/mongoTelemetry');
