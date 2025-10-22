@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.6
-FROM mcr.microsoft.com/devcontainers/typescript-node:20-bullseye
+FROM mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye
 
 WORKDIR /workspace/opentelemetry-template-nodejs
 
