@@ -1,6 +1,5 @@
 # syntax=docker/dockerfile:1.6
-ARG VARIANT="20-bullseye"
-FROM mcr.microsoft.com/devcontainers/typescript-node:${VARIANT}
+FROM mcr.microsoft.com/devcontainers/typescript-node:20-bullseye
 
 WORKDIR /workspace/opentelemetry-template-nodejs
 
