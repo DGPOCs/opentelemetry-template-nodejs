@@ -1,5 +1,7 @@
 'use strict';
 
+require('./config/environment');
+
 const { NodeSDK } = require('@opentelemetry/sdk-node');
 const { resourceFromAttributes } = require('@opentelemetry/resources');
 const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');

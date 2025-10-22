@@ -1,5 +1,7 @@
 'use strict';
 
+require('../config/environment');
+
 const { getDb } = require('./mongoConnection');
 
 const LOGS_COLLECTION = process.env.MONGODB_LOGS_COLLECTION || 'otel_logs';
